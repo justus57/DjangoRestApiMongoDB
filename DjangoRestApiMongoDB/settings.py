@@ -79,18 +79,18 @@ WSGI_APPLICATION = 'DjangoRestApiMongoDB.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+    'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
  
-        'default': {
-            'ENGINE': 'djongo',
-            'NAME': 'RESTAPI' ,
-            'HOST': "mongodb+srv://nodjs:nodejs@nodejs1.ubyhmwp.mongodb.net/RESTAPI",
-            'USER': 'nodjs',
-            'PASSWORD': 'nodejs',
-        }
+        # 'default': {
+        #     'ENGINE': 'djongo',
+        #     'NAME': 'RESTAPI' ,
+        #     'HOST': "mongodb+srv://nodjs:nodejs@nodejs1.ubyhmwp.mongodb.net/RESTAPI",
+        #     'USER': 'nodjs',
+        #     'PASSWORD': 'nodejs',
+        # }
     }
 
 
