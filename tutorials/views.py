@@ -27,11 +27,20 @@ def tutorial_list(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 def tutorial_detail(request, pk):
     # find tutorial by pk (id)
-    try:
+   
+    if request.method == 'GET':
+        try:
+            tutorial = Tutorial.objects.get(pk=pk)
+        except Tutorial.DoesNotExist:
+            return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    elif request.method == 'PUT':
+        tutorial_data = JSONParser().parse(request)
         tutorial = Tutorial.objects.get(pk=pk)
-    except Tutorial.DoesNotExist:
-        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
-
+        tutorial_serializer = TutorialSerializer(tutorial, data=tutorial_data)
+        if tutorial_serializer.is_valid():
+            tutorial_serializer.save()
+            return JsonResponse(tutorial_serializer.data)
+        return JsonResponse(tutorial_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     # GET / PUT / DELETE tutorial
 
 
