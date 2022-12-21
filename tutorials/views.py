@@ -1,12 +1,8 @@
 from django.shortcuts import render
-
 # Create your views here.
-
-
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework import status
-
 from tutorials.models import Tutorial
 from tutorials.serializers import TutorialSerializer
 from rest_framework.decorators import api_view
@@ -26,7 +22,6 @@ def tutorial_list(request):
     
 @api_view(['GET', 'PUT', 'DELETE'])
 def tutorial_detail(request, pk):
-    # find tutorial by pk (id)
    
     if request.method == 'GET':
         try:
@@ -41,9 +36,7 @@ def tutorial_detail(request, pk):
             tutorial_serializer.save()
             return JsonResponse(tutorial_serializer.data)
         return JsonResponse(tutorial_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    # GET / PUT / DELETE tutorial
-
-
+    
 @api_view(['GET'])
 def tutorial_list_published(request):
     tutorials = Tutorial.objects.filter(published=True)
